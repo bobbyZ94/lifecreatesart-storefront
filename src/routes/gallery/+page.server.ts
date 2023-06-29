@@ -3,8 +3,8 @@ import type { PageServerLoad } from './$types'
 
 export const load = (async ({ params }) => {
     return {
-        text: await directus.items('impressum').readOne(1, {
-            fields: ['text']
+        text: await directus.items('gallerie').readOne(1, {
+            fields: ['bilder']
         }).then(({ text }) => text)
     };
 }) satisfies PageServerLoad

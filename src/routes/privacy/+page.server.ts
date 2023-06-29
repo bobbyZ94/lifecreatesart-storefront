@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types'
 
 export const load = (async ({ params }) => {
     return {
-        text: await directus.items('impressum').readOne(1, {
+        text: await directus.items('datenschutz').readOne(1, {
             fields: ['text']
         }).then(({ text }) => text)
     };
