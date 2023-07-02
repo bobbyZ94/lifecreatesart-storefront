@@ -2,7 +2,7 @@
 	export let data
 </script>
 
-<div>
+<div class="rounded-lg bg-white p-5 drop-shadow-md">
 	<h1>Impressum</h1>
-	<p>{@html data.text}</p>
+	<p>{@html data.impressum.text}</p>
 </div>

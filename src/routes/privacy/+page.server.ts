@@ -2,9 +2,7 @@ import { directus } from '../../directus'
 import type { PageServerLoad } from './$types'
 
 export const load = (async ({ params }) => {
-    return {
-        text: await directus.items('datenschutz').readOne(1, {
-            fields: ['text']
-        }).then(({ text }) => text)
-    };
+	return {
+		privacy: (await directus.singleton('datenschutz').read()) as Privacy
+	}
 }) satisfies PageServerLoad

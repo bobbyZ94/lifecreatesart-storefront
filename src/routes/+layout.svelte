@@ -7,10 +7,11 @@
 <div class="font-comfortaa text-lg md:text-xl">
 	<div class="flex flex-col">
 		<Navbar />
-		<div class="min-h-screen w-full bg-fixed flex items-center justify-center" style="background-image: url('images/art.jpg')">
+		<div class="flex min-h-screen w-full items-center justify-center">
+			<div class="mx-5 my-20 max-w-7xl rounded-lg bg-white">
 				<slot />
+			</div>
 		</div>
 	</div>
 	<Footer />
 </div>
-

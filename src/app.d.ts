@@ -12,4 +12,31 @@ declare global {
 	}
 }
 
-export { }
+type Privacy = {
+	text: string
+}
+
+type Impressum = {
+	text: string
+}
+
+type Gallery = {
+	gallerie_bild: [
+		{
+			collection: string
+			id: number
+			item: {
+				id: number
+				gallerie_bild: string
+				gallerie_bild_beschreibung: string
+				gallerie_bild_name: string
+			}
+		}
+	]
+}
+
+type Collections = {
+	datenschutz: Privacy
+	impressum: Impressum
+	gallery: Gallery
+}
