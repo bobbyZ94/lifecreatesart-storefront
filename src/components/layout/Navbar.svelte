@@ -23,8 +23,12 @@
 <div
 	class="sticky left-0 top-0 z-10 flex h-16 w-full items-center justify-between bg-white/95 px-3 py-3 drop-shadow-lg md:h-20 md:px-8"
 >
-	<div class="font-rampart overflow text-3xl font-semibold uppercase tracking-wider md:text-5xl">
-		<a href="/">Lifecreatesart</a>
+	<div
+		class="font-rampart translate-y-2 skew-x-12 rounded bg-gray-400 bg-gradient-to-t from-gray-400 to-white px-2 text-3xl font-semibold uppercase tracking-wider md:text-5xl"
+	>
+		<div class="-translate-y-2 -skew-x-12">
+			<a href="/" class="-skew-x-6">Lifecreatesart</a>
+		</div>
 	</div>
 	<Hamburger bind:toggelNavlist />
 </div>
