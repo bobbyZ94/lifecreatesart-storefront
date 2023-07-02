@@ -8,7 +8,7 @@
 	<div class="flex flex-col">
 		<Navbar />
 		<div class="flex min-h-screen w-full items-center justify-center">
-			<div class="mx-5 my-20 max-w-7xl rounded-lg bg-white">
+			<div class="mx-5 my-12 max-w-7xl md:my-20">
 				<slot />
 			</div>
 		</div>
