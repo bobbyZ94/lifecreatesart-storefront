@@ -1,4 +1,4 @@
 import { Directus } from '@directus/sdk'
-import { DIRECTUS_URL } from '$env/static/private'
+import { PUBLIC_DIRECTUS_URL } from '$env/static/public'
 
-export const directus = new Directus<Collections>(DIRECTUS_URL)
+export const directus = new Directus<Collections>(PUBLIC_DIRECTUS_URL)

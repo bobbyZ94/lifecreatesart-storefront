@@ -2,22 +2,20 @@
 	import { Gallery } from 'flowbite-svelte'
 	import { fade } from 'svelte/transition'
 	import Close from '~icons/mdi/close-circle-outline'
+	import { PUBLIC_DIRECTUS_URL } from '$env/static/public'
 	export let data
 
-	const imageData = data.gallery.gallerie_bild
-	console.log('IMGDATA', imageData)
-
 	// Modal data
+	const imageData = data.gallery.gallerie_bild
 	let imageModal = false
 	let imageSrc = ''
-	$: console.log('SRC', imageSrc)
 	let imageAlt: string | undefined = ''
+
 	$: imageDescription = imageSrc
 		? imageData.filter((image) => image.item.gallerie_bild === imageSrc)[0].item
 				.gallerie_bild_beschreibung
 		: ''
 
-	console.log('DESC', imageDescription)
 	const images: { src: string; alt: string }[] = []
 
 	const masonry_columns = 3
@@ -38,7 +36,7 @@
 			const chunkIndex = Math.floor(index / masonry_columns)
 
 			if (!resultArray[chunkIndex]) {
-				resultArray[chunkIndex] = [] // start a new chunk
+				resultArray[chunkIndex] = []
 			}
 
 			resultArray[chunkIndex].push(item)
@@ -47,7 +45,6 @@
 		},
 		[]
 	)
-	console.log(masonry_images)
 </script>
 
 <Gallery class="grid-cols-1 gap-5 md:grid-cols-3">
@@ -61,7 +58,7 @@
 				}}
 			>
 				<img
-					src={`https://directus.lifecreates.art/assets/${item.src}`}
+					src={`${PUBLIC_DIRECTUS_URL}/assets/${item.src}`}
 					alt={item.alt}
 					class="h-full max-w-full rounded object-cover drop-shadow-lg"
 				/>
@@ -71,9 +68,7 @@
 </Gallery>
 
 {#if imageModal}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div
+	<button
 		transition:fade={{ duration: 300 }}
 		on:click|self={() => (imageModal = false)}
 		class="fixed left-0 top-0 z-20 flex h-screen w-screen flex-col items-center justify-center bg-black/80"
@@ -81,7 +76,7 @@
 		<button on:click|self={() => (imageModal = false)}>
 			<Close class="fixed right-8 top-8 cursor-pointer text-white" style="font-size: 28px" />
 		</button>
-		<div
+		<button
 			on:click|self={() => (imageModal = false)}
 			class="flex flex-col items-center justify-center gap-5"
 		>
@@ -100,6 +95,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		</button>
+	</button>
 {/if}
