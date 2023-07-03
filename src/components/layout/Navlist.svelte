@@ -6,10 +6,10 @@
 
 <div
 	transition:fade={{ duration: transitionDuration }}
-	class="fixed left-0 top-16 z-10 flex h-screen w-full items-center justify-center overflow-hidden bg-white/95 md:top-20"
+	class="fixed left-0 top-0 z-10 flex h-screen w-full items-center justify-center overflow-hidden bg-white/95"
 >
 	<ul
-		class="flex -translate-y-14 flex-col items-center gap-10 text-xl font-semibold uppercase tracking-wide md:text-2xl"
+		class="flex flex-col items-center gap-10 text-xl font-semibold uppercase tracking-wide md:text-2xl"
 	>
 		<li>
 			<a

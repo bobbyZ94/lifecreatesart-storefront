@@ -9,14 +9,14 @@
 	// Remove scrollbar when navlist is open while preserving sroll position
 	$: if (browser) {
 		if (toggelNavlist) {
-			let oldWidth = document.documentElement.clientWidth
-			document.querySelector('body')?.classList.add('overflow-hidden')
-			let newWidth = document.documentElement.clientWidth
-			let scrollbarWidth = Math.max(0, newWidth - oldWidth)
-			document.body.style.marginRight = `${scrollbarWidth}px`
+			// let oldWidth = document.documentElement.clientWidth
+			// document.querySelector('body')?.classList.add('overflow-hidden')
+			// let newWidth = document.documentElement.clientWidth
+			// let scrollbarWidth = Math.max(0, newWidth - oldWidth)
+			// document.body.style.marginRight = `${scrollbarWidth}px`
 		} else {
-			document.querySelector('body')?.classList.remove('overflow-hidden')
-			document.body.style.marginRight = '0px'
+			// document.querySelector('body')?.classList.remove('overflow-hidden')
+			// document.body.style.marginRight = '0px'
 		}
 	}
 
@@ -52,12 +52,13 @@
 <svelte:window bind:scrollY={y} />
 
 <div
+	id="Navbar"
 	class={`${
 		$storeVisibleHeader ? 'translate-y-[0%]' : '-translate-y-[100%]'
-	} sticky left-0 top-0 z-10 flex h-16 w-full transform items-center justify-between bg-white/95 px-3 py-3 transition-transform duration-300 ease-in-out md:h-20 md:px-8`}
+	}  fixed top-0 z-20 flex h-16 w-full transform items-center justify-between overflow-y-scroll px-3 py-3 transition-transform duration-300 ease-in-out md:h-20 md:px-8`}
 >
 	<div class="font-rampart text-3xl font-semibold tracking-wider md:text-5xl">
-		<a href="/">Lifecreatesart</a>
+		<!-- <a href="/">Lifecreatesart</a> -->
 	</div>
 	<Hamburger bind:toggelNavlist />
 </div>

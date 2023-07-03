@@ -5,13 +5,17 @@
 </script>
 
 {#each data.frontpage.components as component}
-	{#if component.collection === 'Block_Hero' && typeof component === 'Block_Hro'}
-		<div>
-			{component?.item?.title}
-		</div>
-		<div>
-			{component?.item?.subtitle}
-		</div>
+	{#if component.collection === 'block_hero' && 'subtitle' in component.item}
+		{#if component.item.title}
+			<div>
+				{component.item.title}
+			</div>
+		{/if}
+		{#if component.item.subtitle}
+			<div>
+				{component.item.subtitle}
+			</div>
+		{/if}
 		<div>
 			<img
 				src={`${PUBLIC_DIRECTUS_URL}/assets/${component.item.image.filename_disk}`}

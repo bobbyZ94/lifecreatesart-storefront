@@ -46,25 +46,27 @@
 	)
 </script>
 
-<Gallery class="grid-cols-1 gap-5 md:grid-cols-3">
-	{#each masonry_images as column}
-		<Gallery items={column} let:item>
-			<button
-				on:click={() => {
-					imageModal = true
-					imageAlt = item.alt
-					imageSrc = item.src
-				}}
-			>
-				<img
-					src={`${PUBLIC_DIRECTUS_URL}/assets/${item.src}`}
-					alt={item.alt}
-					class="h-full max-w-full rounded object-cover drop-shadow-lg"
-				/>
-			</button>
-		</Gallery>
-	{/each}
-</Gallery>
+<div class="mx-5 my-12 max-w-7xl md:my-20">
+	<Gallery class="grid-cols-1 gap-5 md:grid-cols-3">
+		{#each masonry_images as column}
+			<Gallery items={column} let:item>
+				<button
+					on:click={() => {
+						imageModal = true
+						imageAlt = item.alt
+						imageSrc = item.src
+					}}
+				>
+					<img
+						src={`${PUBLIC_DIRECTUS_URL}/assets/${item.src}`}
+						alt={item.alt}
+						class="h-full max-w-full rounded object-cover drop-shadow-lg"
+					/>
+				</button>
+			</Gallery>
+		{/each}
+	</Gallery>
+</div>
 
 {#if imageModal}
 	<Modal bind:imageModal {imageAlt} {imageDescription} {imageSrc} />

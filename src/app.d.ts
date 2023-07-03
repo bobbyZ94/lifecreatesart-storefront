@@ -41,9 +41,7 @@ type Block_Link = {
 }
 
 type Image = {
-	image: {
-		filename_disk: string
-	}
+	filename_disk: string
 }
 
 type Block_Hero = {
@@ -69,7 +67,7 @@ type Block_Text_Image = {
 type Components = {
 	collection: string
 	id: number
-	item?: Block_Text | Block_Text_Image | Block_Hero
+	item: Block_Text | Block_Text_Image | Block_Hero
 }
 
 type Frontpage = {
