@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.postcss'
-	import Navbar from '../components/layout/Navbar.svelte'
-	import Footer from '../components/layout/Footer.svelte'
+	import Navbar from '../components/Layout/Navbar.svelte'
+	import Footer from '../components/Layout/Footer.svelte'
 </script>
 
 <div class="font-comfortaa text-lg md:text-xl">

@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment'
 	import Hamburger from './Hamburger.svelte'
 	import Navlist from './Navlist.svelte'
+	import { storeVisibleHeader } from '../../stores/visibleHeader'
 	let toggelNavlist = false
 	let transitionDuration = 300
 
@@ -18,17 +19,45 @@
 			document.body.style.marginRight = '0px'
 		}
 	}
+
+	// Hide header when scrolling down
+	let y: number
+	let lastY: number = 0
+	let offsetY: number = 200
+	let tolerance: number = 0
+	function deriveHeader(y: number, dy: number) {
+		// show if at the top of page
+		if (y < offsetY) {
+			return true
+		}
+		// don't change the state unless scroll delta is above a threshold
+		if (Math.abs(dy) <= tolerance) {
+			return $storeVisibleHeader
+		}
+		// if scrolling up, show
+		if (dy > 0) {
+			return true
+		}
+		// if scrolling down, hide
+		return false
+	}
+	function updateHeader(y: number) {
+		const dy = lastY - y
+		lastY = y
+		return deriveHeader(y, dy)
+	}
+	$: $storeVisibleHeader = updateHeader(y)
 </script>
 
+<svelte:window bind:scrollY={y} />
+
 <div
-	class="sticky left-0 top-0 z-10 flex h-16 w-full items-center justify-between bg-white/95 px-3 py-3 drop-shadow-lg md:h-20 md:px-8"
+	class={`${
+		$storeVisibleHeader ? 'translate-y-[0%]' : '-translate-y-[100%]'
+	} sticky left-0 top-0 z-10 flex h-16 w-full transform items-center justify-between bg-white/95 px-3 py-3 transition-transform duration-300 ease-in-out md:h-20 md:px-8`}
 >
-	<div
-		class="font-rampart translate-y-2 skew-x-12 rounded bg-gray-400 bg-gradient-to-t from-gray-400 to-white px-2 text-3xl font-semibold uppercase tracking-wider md:text-5xl"
-	>
-		<div class="-translate-y-2 -skew-x-12">
-			<a href="/" class="-skew-x-6">Lifecreatesart</a>
-		</div>
+	<div class="font-rampart text-3xl font-semibold tracking-wider md:text-5xl">
+		<a href="/">Lifecreatesart</a>
 	</div>
 	<Hamburger bind:toggelNavlist />
 </div>

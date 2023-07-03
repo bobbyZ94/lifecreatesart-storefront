@@ -35,8 +35,50 @@ type Gallery = {
 	]
 }
 
+type Block_Link = {
+	name: string
+	url: string
+}
+
+type Image = {
+	image: {
+		filename_disk: string
+	}
+}
+
+type Block_Hero = {
+	title?: string
+	subtitle?: string
+	image: Image
+}
+
+type Block_Text = {
+	title?: string
+	text?: string
+	button?: [Block_Link]
+}
+
+type Block_Text_Image = {
+	title?: string
+	text?: string
+	button?: [Block_Link]
+	flip_image?: boolean
+	image: Image
+}
+
+type Components = {
+	collection: string
+	id: number
+	item?: Block_Text | Block_Text_Image | Block_Hero
+}
+
+type Frontpage = {
+	components: [Components]
+}
+
 type Collections = {
 	datenschutz: Privacy
 	impressum: Impressum
 	gallery: Gallery
+	frontpage: Frontpage
 }

@@ -1,0 +1,1 @@
+- refactor galler image src to filename_disk as src
