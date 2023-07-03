@@ -1,12 +1,24 @@
 <script lang="ts">
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public'
+	import ArrowDown from '~icons/mdi/arrow-down'
 	export let data
+	let toggleArrowDown: boolean = false
+	setTimeout(() => {
+		toggleArrowDown = true
+	}, 3000)
 	console.log(data)
 </script>
 
 <div class="h-full w-full">
-	<div class="flex h-screen w-full items-center justify-center bg-[#DAE6FF]">
+	<div class="relative flex h-screen w-full items-center justify-center md:p-5">
 		<img src="images/logo.jpg" alt="Hero" class="h-full object-contain" />
+		{#if toggleArrowDown}
+			<div
+				class="absolute bottom-10 left-[50%] right-[50%] transform animate-bounce duration-300 ease-in md:bottom-16 md:left-auto md:right-16"
+			>
+				<ArrowDown style="font-size: 35px" />
+			</div>
+		{/if}
 	</div>
 	{#each data.frontpage.components as component}
 		{#if component.collection === 'block_hero' && 'subtitle' in component.item}

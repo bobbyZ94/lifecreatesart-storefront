@@ -3,10 +3,10 @@
 	import Email from '~icons/mdi/email'
 </script>
 
-<div class="flex flex-col items-center justify-center gap-5 py-16">
+<div class="flex flex-col items-center justify-center gap-5 pb-14 pt-36">
 	<a href="https://www.instagram.com/lifecreatesart" class="flex items-center gap-2">
 		<Instagram style="font-size: 28px" />
-		Follow me on Instagram!
+		Follow me on Instagram
 	</a>
 
 	<a href="mailto:info@name.com" class="flex items-center gap-2">

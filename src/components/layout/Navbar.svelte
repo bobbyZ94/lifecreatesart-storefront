@@ -59,12 +59,14 @@
 	id="Navbar"
 	class={`${
 		$storeVisibleHeader ? 'translate-y-[0%]' : '-translate-y-[100%]'
-	} fixed right-0 top-0 z-20 flex h-16 w-full transform items-center justify-between px-3 py-3 transition-transform duration-300 ease-in-out md:h-20 md:px-8`}
+	} fixed right-0 top-0 z-20 flex h-16 w-full transform items-center justify-between px-5 py-3 transition-transform duration-300 ease-in-out md:h-20 md:px-8`}
 >
 	<div class="font-rampart text-3xl font-semibold tracking-wider md:text-5xl">
 		<!-- <a href="/">Lifecreatesart</a> -->
 	</div>
-	<Hamburger bind:toggelNavlist />
+	<div class="mr-3 mt-4">
+		<Hamburger bind:toggelNavlist />
+	</div>
 </div>
 {#if toggelNavlist}
 	<Navlist bind:toggelNavlist {transitionDuration} />
