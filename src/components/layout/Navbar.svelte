@@ -9,14 +9,18 @@
 	// Remove scrollbar when navlist is open while preserving sroll position
 	$: if (browser) {
 		if (toggelNavlist) {
-			// let oldWidth = document.documentElement.clientWidth
-			// document.querySelector('body')?.classList.add('overflow-hidden')
-			// let newWidth = document.documentElement.clientWidth
-			// let scrollbarWidth = Math.max(0, newWidth - oldWidth)
-			// document.body.style.marginRight = `${scrollbarWidth}px`
+			let oldWidth = document.documentElement.clientWidth
+			document.querySelector('body')?.classList.add('overflow-hidden')
+			let newWidth = document.documentElement.clientWidth
+			let scrollbarWidth = Math.max(0, newWidth - oldWidth)
+			document.body.style.marginRight = `${scrollbarWidth}px`
+			document.getElementById('Navbar')!.style.right = `${scrollbarWidth}px`
 		} else {
-			// document.querySelector('body')?.classList.remove('overflow-hidden')
-			// document.body.style.marginRight = '0px'
+			setTimeout(() => {
+				document.querySelector('body')?.classList.remove('overflow-hidden')
+				document.body.style.marginRight = '0px'
+				document.getElementById('Navbar')!.style.right = '0px'
+			}, transitionDuration)
 		}
 	}
 
@@ -55,7 +59,7 @@
 	id="Navbar"
 	class={`${
 		$storeVisibleHeader ? 'translate-y-[0%]' : '-translate-y-[100%]'
-	}  fixed top-0 z-20 flex h-16 w-full transform items-center justify-between overflow-y-scroll px-3 py-3 transition-transform duration-300 ease-in-out md:h-20 md:px-8`}
+	} fixed right-0 top-0 z-20 flex h-16 w-full transform items-center justify-between px-3 py-3 transition-transform duration-300 ease-in-out md:h-20 md:px-8`}
 >
 	<div class="font-rampart text-3xl font-semibold tracking-wider md:text-5xl">
 		<!-- <a href="/">Lifecreatesart</a> -->
