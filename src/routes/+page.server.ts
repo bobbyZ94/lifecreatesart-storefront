@@ -5,7 +5,10 @@ export const load = (async ({ params }) => {
 	return {
 		frontpage: (await directus
 			.items('frontpage')
-			.readByQuery({ limit: -1, fields: ['components.collection', 'components.item.*.*'] })
+			.readByQuery({
+				limit: -1,
+				fields: ['components.collection', 'components.item.*.*', 'components.item.button.*.*']
+			})
 			.then((res) => res.data)) as Frontpage
 	}
 }) satisfies PageServerLoad

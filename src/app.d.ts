@@ -36,8 +36,10 @@ type Gallery = {
 }
 
 type Block_Link = {
-	name: string
-	url: string
+	item: {
+		name: string
+		url: string
+	}
 }
 
 type Image = {

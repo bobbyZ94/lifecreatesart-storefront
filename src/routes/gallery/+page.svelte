@@ -46,7 +46,7 @@
 	)
 </script>
 
-<div class="mx-5 my-12 max-w-7xl md:my-20">
+<div class="mx-5 my-20 max-w-7xl md:my-32">
 	<Gallery class="grid-cols-1 gap-5 md:grid-cols-3">
 		{#each masonry_images as column}
 			<Gallery items={column} let:item>
