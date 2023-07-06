@@ -14,7 +14,7 @@
 		<img src="images/logo.jpg" alt="Hero" class="h-full object-contain" />
 		{#if toggleArrowDown}
 			<div
-				class="absolute bottom-10 left-[50%] right-[50%] transform animate-bounce duration-300 ease-in md:bottom-16 md:left-auto md:right-16"
+				class="absolute bottom-[3rem] transform animate-bounce duration-300 ease-in md:bottom-[3rem] md:left-auto md:right-[3rem]"
 			>
 				<ArrowDown style="font-size: 35px" />
 			</div>
