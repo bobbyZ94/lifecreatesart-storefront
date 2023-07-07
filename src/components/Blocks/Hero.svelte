@@ -4,57 +4,62 @@
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public'
 	import { onMount } from 'svelte'
 	export let block: Block_Hero
+	let ref: Node
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger)
-		gsap.to('.hero-img', {
-			scrollTrigger: {
-				trigger: '.hero-img',
-				pin: '#hero-image-container',
-				start: 'center center',
-				scrub: 2,
-				// Removes whitespace left behind by pinning
-				onLeave: function (self: any) {
-					let start = self.start
-					self.scroll(self.start)
-					self.disable()
-					self.animation.progress(1)
-					ScrollTrigger.refresh()
-					window.scrollTo(0, start)
-				}
-			},
-			scale: 1,
-			duration: 2
-		})
+		let ctx = gsap.context(() => {
+			gsap.to('.block-hero-image', {
+				scrollTrigger: {
+					trigger: '.block-hero-image',
+					pin: '#block-hero-container',
+					start: 'center center',
+					scrub: 2.0
+					// Removes whitespace left behind by pinning ! DONT REMOVE INCASE NEEDED !
+					// onLeave: function (self: any) {
+					// 	let start = self.start
+					// 	self.scroll(self.start)
+					// 	self.disable()
+					// 	self.animation.progress(1)
+					// 	ScrollTrigger.refresh()
+					// 	window.scrollTo(0, start)
+					// }
+				},
+				scale: 1,
+				duration: 3
+			})
+		}, ref)
 	})
 </script>
 
-<div id="hero-image-container" class="relative h-screen w-full">
-	<img
-		src={`${PUBLIC_DIRECTUS_URL}/assets/${block.image.filename_disk}`}
-		alt="Hero"
-		class="hero-img h-full w-full object-cover drop-shadow-lg md:h-screen"
-	/>
-	{#if block.title || block.subtitle}
-		<div
-			class="absolute left-[50%] top-[50%] flex w-4/5 -translate-x-[50%] -translate-y-[50%] flex-col gap-5 rounded-3xl bg-white/70 p-2 text-center backdrop-blur-md sm:w-2/5 md:p-5"
-		>
-			{#if block.title}
-				<div class="font-playfair text-3xl font-bold tracking-wider md:text-6xl">
-					{block.title}
-				</div>
-			{/if}
-			{#if block.subtitle}
-				<div class="text-xl md:text-2xl">
-					{block.subtitle}
-				</div>
-			{/if}
-		</div>
-	{/if}
+<div bind:this={ref}>
+	<div id="block-hero-container" class="relative h-screen w-full">
+		<img
+			src={`${PUBLIC_DIRECTUS_URL}/assets/${block.image.filename_disk}`}
+			alt="Hero"
+			class="block-hero-image h-full w-full object-cover drop-shadow-lg md:h-screen"
+		/>
+		{#if block.title || block.subtitle}
+			<div
+				class="absolute left-[50%] top-[50%] flex w-4/5 -translate-x-[50%] -translate-y-[50%] flex-col gap-5 rounded-3xl bg-white/70 p-2 text-center backdrop-blur-md sm:w-2/5 md:p-5"
+			>
+				{#if block.title}
+					<div class="font-playfair text-3xl font-bold tracking-wider md:text-6xl">
+						{block.title}
+					</div>
+				{/if}
+				{#if block.subtitle}
+					<div class="text-xl md:text-2xl">
+						{block.subtitle}
+					</div>
+				{/if}
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style>
-	.hero-img {
+	.block-hero-image {
 		@apply scale-[2.0];
 	}
 </style>

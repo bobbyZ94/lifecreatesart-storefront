@@ -11,7 +11,7 @@
 	// Remove scrollbar when navlist is open while preserving sroll position
 	let toggelNavlist = false
 	let transitionDuration = 300
-	$: if (browser) {
+	$: if (browser && document) {
 		onMount(() => {
 			removeScrollbar(toggelNavlist, transitionDuration)
 		})

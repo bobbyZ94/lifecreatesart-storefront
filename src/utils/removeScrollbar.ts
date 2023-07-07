@@ -1,11 +1,10 @@
 export default function removeScrollbar(toggelNavlist: boolean, transitionDuration: number) {
-	if (toggelNavlist) {
+	if (toggelNavlist && document.body) {
 		let oldWidth = document.documentElement.clientWidth
-		document.querySelector('body')?.classList.add('overflow-hidden')
+		document.body.classList.add('overflow-hidden')
 		let newWidth = document.documentElement.clientWidth
 		let scrollbarWidth = Math.max(0, newWidth - oldWidth)
-		let bodyMr = document.body.style.marginRight ?? '0px'
-		bodyMr = `${scrollbarWidth}px`
+		document.body.style.marginRight = `${scrollbarWidth}px`
 		document.getElementById('Navbar')!.style.right = `${scrollbarWidth}px`
 	} else {
 		setTimeout(() => {
