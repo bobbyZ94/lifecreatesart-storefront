@@ -15,7 +15,9 @@
 		<img
 			src={`${PUBLIC_DIRECTUS_URL}/assets/${block.image.filename_disk}`}
 			alt="Hero"
-			class="h-full w-full rounded-full object-cover px-1 drop-shadow-lg"
+			class={`${
+				block.flip_image ? 'rounded-l-full' : 'rounded-r-full'
+			} h-full w-full object-cover drop-shadow-lg`}
 		/>
 	</div>
 </div>

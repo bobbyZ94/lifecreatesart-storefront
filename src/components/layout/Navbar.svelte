@@ -6,12 +6,15 @@
 	import hideHeaderOnScrollDown from '../../utils/hideHeaderOnScrollDown'
 	import { storeVisibleHeader } from '../../stores/visibleHeader'
 	import { fly } from 'svelte/transition'
+	import { onMount } from 'svelte'
 
 	// Remove scrollbar when navlist is open while preserving sroll position
 	let toggelNavlist = false
 	let transitionDuration = 300
 	$: if (browser) {
-		removeScrollbar(toggelNavlist, transitionDuration)
+		onMount(() => {
+			removeScrollbar(toggelNavlist, transitionDuration)
+		})
 	}
 
 	// Hide header when scrolling down

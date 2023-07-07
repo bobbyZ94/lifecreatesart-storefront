@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { GradientButton } from 'flowbite-svelte'
 	export let block: Block_Text
 </script>
 

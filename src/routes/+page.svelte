@@ -1,31 +1,43 @@
 <script lang="ts">
-	import { inview } from 'svelte-inview'
-	import type { ObserverEventDetails, ScrollDirection, Options } from 'svelte-inview'
 	import ArrowDown from '~icons/mdi/arrow-down'
 	import Hero from '../components/Blocks/Hero.svelte'
 	import Text from '../components/Blocks/Text.svelte'
 	import TextImage from '../components/Blocks/TextImage.svelte'
+	import { gsap } from 'gsap/dist/gsap.js'
+	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
+	import { onMount } from 'svelte'
 	export let data
 
-	// Animation by scrolling into view
+	// Gsap scroll trigger animations
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger)
+		gsap.to('.block-text-container', {
+			scrollTrigger: {
+				trigger: '.block-text-container',
+				start: 'top top',
+				scrub: true,
+				pin: true,
+				// Removes whitespace left behind by pinning
+				onLeave: function (self: any) {
+					let start = self.start
+					self.scroll(self.start)
+					self.disable()
+					self.animation.progress(1)
+					ScrollTrigger.refresh()
+					window.scrollTo(0, start)
+				}
+			},
+			x: 0,
+			duration: 3
+		})
+	})
+
+	// Toggle down arrow
 	let y: number
 	let toggleArrowDown: boolean = false
 	setTimeout(() => {
 		toggleArrowDown = true
 	}, 3000)
-	console.log(data)
-
-	let isInView: boolean
-	let scrollDirection: ScrollDirection
-	const options: Options = {
-		rootMargin: '-50px',
-		unobserveOnEnter: true
-	}
-
-	// const handleChange = ({ detail }: CustomEvent<ObserverEventDetails>) => {
-	// 	isInView = detail.inView
-	// 	scrollDirection = detail.scrollDirection.vertical
-	// }
 </script>
 
 <svelte:window bind:scrollY={y} />
@@ -41,17 +53,29 @@
 			</div>
 		{/if}
 	</div>
-	<div class="flex flex-col gap-32">
+	<div class="flex flex-col gap-32 pt-32">
 		{#each data.frontpage.components as component, index}
-			<div id={index.toString()}>
+			<div class="" id={index.toString()}>
 				{#if component.collection === 'block_hero' && 'subtitle' in component.item}
-					<Hero block={component.item} />
+					<div class="overflow-hidden">
+						<Hero block={component.item} />
+					</div>
 				{:else if component.collection === 'block_text' && 'text' in component.item}
-					<Text block={component.item} />
+					<div class="block-text-container">
+						<Text block={component.item} />
+					</div>
 				{:else if component.collection === 'block_text_image' && 'flip_image' in component.item}
-					<TextImage block={component.item} />
+					<div>
+						<TextImage block={component.item} />
+					</div>
 				{/if}
 			</div>
 		{/each}
 	</div>
 </div>
+
+<style>
+	.block-text-container {
+		@apply -translate-x-[1000px];
+	}
+</style>

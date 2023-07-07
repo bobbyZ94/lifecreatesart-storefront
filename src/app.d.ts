@@ -3,6 +3,9 @@
 /// <reference types="@sveltejs/kit" />
 /// <reference types="unplugin-icons/types/svelte" />
 
+declare module 'gsap/dist/ScrollTrigger.js'
+declare module 'gsap/dist/gsap.js'
+
 declare global {
 	namespace App {
 		// interface Error {}
