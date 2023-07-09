@@ -41,7 +41,7 @@
 		/>
 		{#if block.title || block.subtitle}
 			<div
-				class="absolute left-[50%] top-[50%] flex w-4/5 -translate-x-[50%] -translate-y-[50%] flex-col gap-5 rounded-3xl bg-white/70 p-2 text-center backdrop-blur-md sm:w-2/5 md:p-5"
+				class="absolute left-[50%] top-[50%] flex w-4/5 -translate-x-[50%] -translate-y-[50%] flex-col gap-5 rounded-3xl bg-white/70 p-2 text-center backdrop-blur-md md:w-3/5 md:p-5 lg:w-2/5"
 			>
 				{#if block.title}
 					<div class="font-playfair text-3xl font-bold tracking-wider md:text-6xl">

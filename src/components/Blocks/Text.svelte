@@ -12,7 +12,7 @@
 			</div>
 		{/if}
 		{#if block.text}
-			<div class="prose-blockquote: prose prose-xl md:prose-2xl prose-blockquote:border-l-gray-500">
+			<div class="prose prose-xl p-2 md:prose-2xl prose-blockquote:border-l-gray-500">
 				{@html block.text}
 			</div>
 		{/if}
@@ -20,9 +20,12 @@
 			<div class="flex gap-4">
 				{#each block.button as button}
 					<a href={button.item.url}>
-						<button
-							class="rounded-xl bg-gray-800 px-3 py-2 text-lg text-white drop-shadow-2xl duration-300 ease-in-out hover:scale-105 md:text-2xl"
-							>{button.item.name}</button
+						<button class="group rounded-xl bg-gray-400 text-lg text-white md:text-2xl"
+							><div
+								class="h-full w-full rounded-xl bg-gray-800 p-2 drop-shadow-lg duration-300 ease-in-out group-hover:-translate-x-2 group-hover:-translate-y-2"
+							>
+								{button.item.name}
+							</div></button
 						>
 					</a>
 				{/each}

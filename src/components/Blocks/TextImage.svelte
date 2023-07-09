@@ -5,106 +5,80 @@
 	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
 	import { onMount } from 'svelte'
 	export let block: Block_Text_Image
-	let x: number = 0
+
 	let ref: Node
+	$: x = 0
+	$: mobileScreen = x > 768 ? false : true
 
 	// Gsap scroll trigger animations
-	onMount(() => {
+	$: onMount(() => {
 		gsap.registerPlugin(ScrollTrigger)
 		let ctx = gsap.context(() => {
-			if (x > 768) {
-				gsap.to('.block-text-container-left', {
-					scrollTrigger: {
-						trigger: '.block-text-container-left',
-						start: '0% 100%',
-						end: 'top',
-						scrub: 2.0
-					},
+			gsap.fromTo(
+				'.block-container-left',
+				{
+					x: -1000
+				},
+				{
 					x: 0,
-					duration: 3
-				})
-				gsap.to('.block-image-container-right', {
+					duration: 3,
 					scrollTrigger: {
-						trigger: '.block-image-container-right',
-						start: '0% 100%',
-						end: 'top',
-						scrub: 2.0
-					},
+						trigger: '.block-container-left',
+						start: 'top bottom', // [trigger element pos (start/end markers)] [scroller pos (start/end scroller markers)]
+						end: mobileScreen ? '50% bottom' : '30% center',
+						scrub: 3.0
+					}
+				}
+			)
+			gsap.fromTo(
+				'.block-container-right',
+				{
+					x: 1000
+				},
+				{
 					x: 0,
-					duration: 3
-				})
-			} else {
-				gsap.to('.block-text-container-left', {
+					duration: 3,
 					scrollTrigger: {
-						trigger: '.block-text-container-left',
-						start: 'center bottom',
-						end: 'top',
-						scrub: 2.0
-					},
-					x: 0,
-					duration: 3
-				})
-				gsap.to('.block-image-container-right', {
-					scrollTrigger: {
-						trigger: '.block-image-container-right',
-						start: 'center bottom',
-						end: 'top',
-						scrub: 2.0
-					},
-					x: 0,
-					duration: 3
-				})
-			}
+						trigger: '.block-container-right',
+						start: 'top bottom', // [trigger element pos (start/end markers)] [scroller pos (start/end scroller markers)]
+						end: mobileScreen ? '50% bottom' : '30% center',
+						scrub: 3.0
+					}
+				}
+			)
 		}, ref)
 	})
-	$: console.log(x)
-	$: console.log(block.flip_image)
 </script>
 
 <svelte:window bind:innerWidth={x} />
 
 <div
 	bind:this={ref}
-	class="grid h-full w-full grid-cols-1 gap-32 md:h-screen md:grid-cols-2 md:gap-5"
+	class="grid h-full w-full grid-cols-1 gap-32 overflow-hidden md:h-screen md:grid-cols-2 md:gap-5"
 >
-	<div class="block-text-container-left order-1">
+	<div class={`${block.flip_image ? 'block-container-left' : 'block-container-right'}`}>
 		<Text {block} />
 	</div>
-	<div class="block-image-container-right order-2">
+	<div class={`${block.flip_image ? 'block-container-right' : 'block-container-left'}`}>
 		<img
 			src={`${PUBLIC_DIRECTUS_URL}/assets/${block.image.filename_disk}`}
 			alt="Hero"
 			class={`${
-				block.flip_image ? 'rounded-l-full' : 'rounded-r-full'
-			} h-full w-full object-cover drop-shadow-lg`}
+				block.flip_image
+					? 'rounded-br-[20%] rounded-tl-[20%] md:rounded-l-[40%] md:rounded-br-[0%] md:rounded-tl-[40%]'
+					: 'rounded-bl-[20%] rounded-tr-[20%] md:rounded-r-[40%] md:rounded-bl-[0%] md:rounded-tr-[40%]'
+			} drop-shadow-lg" h-full w-full object-cover`}
 		/>
 	</div>
-
-	<!-- <div class="block-text-container-right order-2">
-			<Text {block} />
-		</div>
-		<div class="block-image-container-left order-1">
-			<img
-				src={`${PUBLIC_DIRECTUS_URL}/assets/${block.image.filename_disk}`}
-				alt="Hero"
-				class={`${
-					block.flip_image ? 'rounded-l-full' : 'rounded-r-full'
-				} h-full w-full object-cover drop-shadow-lg`}
-			/>
-		</div> -->
 </div>
 
 <style>
-	.block-text-container-right {
-		@apply translate-x-[1500px];
-	}
-	.block-text-container-left {
-		@apply -translate-x-[1500px];
-	}
-	.block-image-container-right {
-		@apply translate-x-[1500px];
-	}
-	.block-image-container-left {
-		@apply -translate-x-[1500px];
+	@media (min-width: 768px) {
+		.block-container-right {
+			@apply order-2;
+		}
+		.block-container-left {
+			@apply order-1;
+		}
 	}
 </style>

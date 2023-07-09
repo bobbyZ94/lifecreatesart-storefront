@@ -17,25 +17,33 @@
 
 	// Gsap scroll trigger animations
 	let ref: Node
+	$: x = 0
+	$: mobileScreen = x > 768 ? false : true
+
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger)
 		let ctx = gsap.context(() => {
-			gsap.to('.block-text-container', {
-				scrollTrigger: {
-					trigger: '.block-text-container',
-					start: '-0% 100%',
-					end: 'top',
-					scrub: 2.0
+			gsap.fromTo(
+				'#block-text-container',
+				{
+					x: -1000
 				},
-				x: 0,
-				ease: 'sine',
-				duration: 3
-			})
+				{
+					x: 0,
+					duration: 3,
+					scrollTrigger: {
+						trigger: '#block-text-container',
+						start: 'top bottom', // [trigger element pos (start/end markers)] [scroller pos (start/end scroller markers)]
+						end: mobileScreen ? '50% bottom' : '30% center',
+						scrub: 3.0
+					}
+				}
+			)
 		}, ref)
 	})
 </script>
 
-<svelte:window bind:scrollY={y} />
+<svelte:window bind:scrollY={y} bind:innerWidth={x} />
 
 <div class="h-full w-full">
 	<div class="relative flex h-screen w-full items-center justify-center md:p-5">
@@ -57,7 +65,7 @@
 					</div>
 				{:else if component.collection === 'block_text' && 'text' in component.item}
 					<div bind:this={ref}>
-						<div class="block-text-container">
+						<div id="block-text-container">
 							<Text block={component.item} />
 						</div>
 					</div>
@@ -68,9 +76,3 @@
 		{/each}
 	</div>
 </div>
-
-<style>
-	.block-text-container {
-		@apply -translate-x-[1500px];
-	}
-</style>
