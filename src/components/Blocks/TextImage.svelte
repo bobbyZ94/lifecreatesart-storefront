@@ -26,7 +26,7 @@
 						trigger: '.block-container-left',
 						start: 'top bottom', // [trigger element pos (start/end markers)] [scroller pos (start/end scroller markers)]
 						end: mobileScreen ? '50% bottom' : '30% center',
-						scrub: 3.0
+						scrub: 4.0
 					}
 				}
 			)
@@ -42,7 +42,7 @@
 						trigger: '.block-container-right',
 						start: 'top bottom', // [trigger element pos (start/end markers)] [scroller pos (start/end scroller markers)]
 						end: mobileScreen ? '50% bottom' : '30% center',
-						scrub: 3.0
+						scrub: 4.0
 					}
 				}
 			)

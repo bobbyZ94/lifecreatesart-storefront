@@ -2,11 +2,13 @@
 	import { fade } from 'svelte/transition'
 	export let toggleNavlist: boolean
 	export let transitionDuration: number
+	export let navlist: HTMLElement
 </script>
 
 <div
+	bind:this={navlist}
 	transition:fade={{ duration: transitionDuration }}
-	class="fixed left-0 top-0 z-10 flex h-screen w-full items-center justify-center overflow-hidden bg-white/95"
+	class="fixed right-0 top-0 z-10 flex h-screen w-full items-center justify-center bg-white/95"
 >
 	<ul
 		class="flex flex-col items-center gap-10 text-2xl font-semibold uppercase tracking-wide md:text-4xl"
