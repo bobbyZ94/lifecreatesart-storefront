@@ -15,7 +15,7 @@
 					pin: '#block-hero-container',
 					start: 'center center',
 					scrub: 2.0
-					// Removes whitespace left behind by pinning ! DONT REMOVE INCASE NEEDED !
+					// Removes whitespace left behind by pinning if you want to run only once=true ! DONT REMOVE INCASE NEEDED !
 					// onLeave: function (self: any) {
 					// 	let start = self.start
 					// 	self.scroll(self.start)

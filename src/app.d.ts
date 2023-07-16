@@ -23,6 +23,10 @@ type Impressum = {
 	text: string
 }
 
+type Kontakt = {
+	text: string
+}
+
 type Gallery = {
 	gallerie_bild: [
 		{

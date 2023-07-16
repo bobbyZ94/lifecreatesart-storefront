@@ -1,2 +1,2 @@
 - refactor galler image src to filename_disk as src
-- problem with navbar scrollbar hiding
+- maybe add small animation (zoom) to mouse hover on frontapge pictures
