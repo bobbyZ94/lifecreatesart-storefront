@@ -56,7 +56,7 @@
 	bind:this={ref}
 	class="grid h-full w-full grid-cols-1 gap-32 overflow-hidden md:h-screen md:grid-cols-2 md:gap-5"
 >
-	<div class={`${block.flip_image ? 'block-container-left' : 'block-container-right'} z-20`}>
+	<div class={`${block.flip_image ? 'block-container-left' : 'block-container-right'}`}>
 		<Text {block} />
 	</div>
 	<div
