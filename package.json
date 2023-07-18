@@ -47,6 +47,8 @@
 		"@medusajs/medusa-js": "^6.0.2",
 		"@popperjs/core": "^2.11.8",
 		"classnames": "^2.3.2",
+		"embla-carousel-auto-height": "^8.0.0-rc11",
+		"embla-carousel-svelte": "^8.0.0-rc11",
 		"flowbite": "^1.6.6",
 		"flowbite-svelte": "^0.38.2",
 		"gsap": "^3.12.2",
