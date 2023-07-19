@@ -44,23 +44,27 @@
 			{/each}
 		</div>
 	</div>
-	<button on:click={scrollPrev} class="absolute bottom-[45%] left-1 text-slate-600"
-		><ChevronLeftCircle style="font-size: 28px" /></button
-	>
-	<button on:click={scrollNext} class="absolute bottom-[45%] right-1 text-slate-600"
-		><ChevronRightCircle style="font-size: 28px" /></button
-	>
-</div>
-<div class="flex h-full w-full items-center justify-center gap-4">
-	{#each images as image, index}
-		<button
-			class={`${
-				index === markedIndicator ? 'border-slate-800' : 'border-slate-400'
-			} w-5 cursor-pointer border-b-[6px] `}
-			on:click={() => scrollToSlide(index)}>&nbsp</button
+	{#if images.length > 1}
+		<button on:click={scrollPrev} class="absolute bottom-[45%] left-1 text-slate-600"
+			><ChevronLeftCircle style="font-size: 28px" /></button
 		>
-	{/each}
+		<button on:click={scrollNext} class="absolute bottom-[45%] right-1 text-slate-600"
+			><ChevronRightCircle style="font-size: 28px" /></button
+		>
+	{/if}
 </div>
+{#if images.length > 1}
+	<div class="flex h-full w-full items-center justify-center gap-4">
+		{#each images as image, index}
+			<button
+				class={`${
+					index === markedIndicator ? 'border-slate-800' : 'border-slate-400'
+				} w-5 cursor-pointer border-b-[6px] `}
+				on:click={() => scrollToSlide(index)}>&nbsp</button
+			>
+		{/each}
+	</div>
+{/if}
 
 <style>
 	.embla {

@@ -1,2 +1,5 @@
 - refactor galler image src to filename_disk as src
-- maybe add small animation (zoom) to mouse hover on frontapge pictures
+
+// CART
+- drawer open right 
+- create navlist left site icon when add to cart clicked first time

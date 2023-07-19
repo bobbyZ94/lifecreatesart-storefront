@@ -7,7 +7,7 @@
 		class="flex h-full w-full flex-col items-center justify-center gap-5 p-5 text-center md:h-screen"
 	>
 		{#if block.title}
-			<div class="font-playfair text-3xl font-bold tracking-wider md:text-6xl">
+			<div class="font-permanent text-3xl font-bold tracking-wider md:text-6xl">
 				{block.title}
 			</div>
 		{/if}

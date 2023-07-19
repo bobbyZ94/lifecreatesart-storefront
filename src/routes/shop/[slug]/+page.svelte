@@ -11,11 +11,12 @@
 	const price = product.variants[0].prices[0].amount
 	const width = product.variants[0].width
 	const height = product.variants[0].height
+	const weight = product.variants[0].weight
 </script>
 
-<div class="my-20 max-w-7xl overflow-hidden rounded-lg p-5 drop-shadow-lg">
+<div class="my-20 max-w-7xl overflow-hidden rounded-lg p-5 drop-shadow-lg md:my-32">
 	<div class="flex flex-col items-center">
 		<Carousel {images} />
-		<Textbox {title} {description} {inventory} {price} {width} {height} />
+		<Textbox {title} {description} {inventory} {price} {width} {height} {weight} />
 	</div>
 </div>
