@@ -16,6 +16,7 @@ const config = {
 				permanent: 'Permanent Marker, sans-serif'
 			},
 			colors: {
+				lifecreatesartblue: '#DAE6FF',
 				// sky
 				primary: {
 					50: '#f0f9ff',

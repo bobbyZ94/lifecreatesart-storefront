@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Card } from 'flowbite-svelte'
 	export let data
+	$: console.log(data)
 </script>
 
 <div class="my-20 max-w-7xl overflow-hidden rounded-lg p-5 drop-shadow-lg">
