@@ -31,7 +31,7 @@
 	})
 </script>
 
-<Drawer transitionType="fly" {transitionParams} bind:hidden={hiddenCart}>
+<Drawer transitionType="fly" {transitionParams} bind:hidden={hiddenCart} id="cart">
 	<div class="flex items-center">
 		<CloseButton on:click={() => (hiddenCart = true)} class="mb-4 dark:text-white" />
 	</div>

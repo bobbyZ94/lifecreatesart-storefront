@@ -17,15 +17,17 @@
 	let navlist: HTMLElement
 	let navheader: HTMLElement
 	onMount(() => (mounted = true)) // Make sure component exists in DOM so document and window can be accessed
-	function removeScrollbarWithoutLayoutShift() {
+	function removeScrollbarWithoutLayoutShift(toggle: boolean, reverse: boolean = false) {
 		const scrollbarWidth = window.innerWidth - document.body.clientWidth
-		if (toggleNavlist) {
+		if ((toggle && !reverse) || (!toggle && reverse)) {
+			console.log('HERE1')
 			document.body.style.marginRight = `${scrollbarWidth}px`
 			if (navheader) navheader.style.marginRight = `${scrollbarWidth}px`
 			if (navlist) navlist.style.marginRight = `${scrollbarWidth}px`
 			document.body.style.overflow = 'hidden'
 		} else {
 			setTimeout(() => {
+				console.log('HERE')
 				document.body.style.marginRight = '0px'
 				document.body.style.overflow = ''
 				if (navheader) navheader.style.marginRight = '0px'
@@ -33,8 +35,8 @@
 			}, transitionDuration)
 		}
 	}
-	$: toggleNavlist, mounted && removeScrollbarWithoutLayoutShift() // Runs function everytime toggleNavlist is changed and mounted - regardless of value of toggleNavlist
-
+	$: toggleNavlist, mounted && removeScrollbarWithoutLayoutShift(toggleNavlist) // Runs function everytime toggleNavlist is changed and mounted - regardless of value of toggleNavlist
+	$: hiddenCart, mounted && removeScrollbarWithoutLayoutShift(hiddenCart, true) // Runs function everytime hiddenCart is changed and mounted - regardless of value of hiddenCart
 	// Hide header when scrolling down
 	let y: number
 	$: $storeVisibleHeader = hideHeaderOnScrollDown(y, $storeVisibleHeader)
