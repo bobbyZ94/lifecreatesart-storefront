@@ -1,9 +1,10 @@
 <script lang="ts">
 	import Carousel from '../../../components/Shop/Carousel.svelte'
 	import Textbox from '../../../components/Shop/Textbox.svelte'
+	import { cartStore } from '../../../stores/cartStore'
 	export let data
 	const { product } = data
-	console.log(product)
+	const variant_id = product.variants[0].id
 	const images = product.images
 	const title = product.title
 	const description = product.description
@@ -17,6 +18,6 @@
 <div class="my-20 max-w-7xl overflow-hidden rounded-lg p-5 drop-shadow-lg md:my-32">
 	<div class="flex flex-col items-center">
 		<Carousel {images} />
-		<Textbox {title} {description} {inventory} {price} {width} {height} {weight} />
+		<Textbox {variant_id} {title} {description} {inventory} {price} {width} {height} {weight} />
 	</div>
 </div>

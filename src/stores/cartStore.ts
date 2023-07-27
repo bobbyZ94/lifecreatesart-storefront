@@ -1,14 +1,14 @@
-import { persisted } from 'svelte-local-storage-store'
+import { writable } from 'svelte/store'
+import type { Writable } from 'svelte/store'
 
 interface Cart {
 	items: Item[]
 	id: string
+	quantity?: number
 }
 
-type Item = {
+interface Item {
 	title: string
-	quantity: number
-	price: number
 }
 
-export const cartStore = persisted<Cart>('cart', { items: [] })
+export const cartStore: Writable<Cart> = writable({ id: '', items: [] })
