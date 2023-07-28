@@ -5,6 +5,7 @@
 	import CartOutline from '~icons/mdi/cart-outline'
 	import hideHeaderOnScrollDown from '../../utils/hideHeaderOnScrollDown'
 	import { storeVisibleHeader } from '../../stores/visibleHeader'
+	import { cartStore } from '../../stores/cartStore'
 	import { fly } from 'svelte/transition'
 	import { onMount } from 'svelte'
 
@@ -39,10 +40,14 @@
 
 	// Runs function everytime toggleNavlist is changed and mounted - regardless of value of toggleNavlist
 	$: toggleNavlist, mounted && removeScrollbarWithoutLayoutShift(toggleNavlist)
-	// $: hiddenCart, mounted && removeScrollbarWithoutLayoutShift(hiddenCart, true)
+	$: hiddenCart, mounted && removeScrollbarWithoutLayoutShift(hiddenCart, true)
 	// Hide header when scrolling down
 	let y: number
 	$: $storeVisibleHeader = hideHeaderOnScrollDown(y, $storeVisibleHeader)
+
+	// Calculate number of items in cart
+	let items: number = 0
+	$: items = $cartStore.items.reduce((acc, item) => acc + item.quantity, 0)
 </script>
 
 <svelte:window bind:scrollY={y} />
@@ -54,12 +59,20 @@
 			transition:fly={{ duration: 300, y: -100 }}
 			class={`${
 				toggleNavlist ? 'bg-transparent' : 'bg-lifecreatesartblue/70'
-			} md:h-18 fixed right-0 top-0 z-20 flex h-14 w-full items-center justify-between px-5 backdrop-blur-md md:px-8`}
+			} fixed right-0 top-0 z-20 flex h-14 w-full items-center justify-between px-5 backdrop-blur-md md:h-[4.5rem] md:px-12 xl:px-20`}
 		>
-			<button on:click={() => (hiddenCart = false)} bind:this={cartButton}>
-				<CartOutline style="font-size: 28px" />
-			</button>
-
+			<div class="relative px-2 pt-1">
+				<button on:click={() => (hiddenCart = false)} bind:this={cartButton}>
+					<CartOutline class="text-3xl md:text-4xl" />
+				</button>
+				{#if items > 0}
+					<div
+						class="absolute right-0 top-0 h-[19px] w-[20px] rounded-full bg-white/95 text-center font-sans text-xs leading-5"
+					>
+						{items}
+					</div>
+				{/if}
+			</div>
 			<Hamburger bind:toggleNavlist />
 		</div>
 	{/if}

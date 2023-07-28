@@ -14,7 +14,7 @@
 <div class="my-20 flex w-full max-w-5xl flex-col items-center gap-8">
 	<div class="gapo-8 grid w-full md:grid-cols-3 md:gap-28">
 		<div class="flex flex-col gap-6 md:col-span-2">
-			<div class="break-all font-permanent text-4xl font-bold md:text-5xl">
+			<div class="break-words font-permanent text-4xl font-bold md:text-5xl">
 				{title}
 			</div>
 			<div class="text-xl md:text-2xl">{description}</div>
