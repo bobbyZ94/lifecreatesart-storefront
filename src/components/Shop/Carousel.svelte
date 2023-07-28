@@ -15,14 +15,24 @@
 	let markedIndicator: number = 0
 	function scrollNext() {
 		if (emblaApi) {
-			markedIndicator++
-			emblaApi.scrollNext()
+			if (markedIndicator === images.length - 1) {
+				markedIndicator = 0
+				emblaApi.scrollTo(markedIndicator)
+			} else {
+				markedIndicator++
+				emblaApi.scrollTo(markedIndicator)
+			}
 		}
 	}
 	function scrollPrev() {
 		if (emblaApi) {
-			markedIndicator--
-			emblaApi.scrollPrev()
+			if (markedIndicator === 0) {
+				markedIndicator = images.length - 1
+				emblaApi.scrollTo(markedIndicator)
+			} else {
+				markedIndicator--
+				emblaApi.scrollTo(markedIndicator)
+			}
 		}
 	}
 
@@ -32,6 +42,8 @@
 			emblaApi.scrollTo(index)
 		}
 	}
+
+	$: console.log(markedIndicator)
 </script>
 
 <div class="embla relative">
@@ -71,7 +83,9 @@
 		overflow: hidden;
 	}
 	.embla__container {
-		display: flex;
+		display: grid;
+		grid-auto-flow: column;
+		grid-auto-columns: 100%; /* Each slide covers 80% of the viewport */
 	}
 	.embla__slide {
 		flex: 0 0 100%;

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { addToCart } from '$lib/shop/addToCart'
-	import { browser } from '$app/environment'
 	export let variant_id: string
 	export let title: string
 	export let description: string
@@ -9,6 +8,8 @@
 	export let width: number
 	export let height: number
 	export let weight: number
+	export let quantity: number
+	$: console.log(quantity)
 </script>
 
 <div class="my-20 flex w-full max-w-5xl flex-col items-center gap-8">
@@ -31,11 +32,8 @@
 	</div>
 	<button
 		on:click={() => addToCart(variant_id)}
-		class="group w-full max-w-md justify-self-center rounded-xl bg-gray-400 text-center text-lg text-white md:text-2xl"
-		><div
-			class="h-full rounded-xl bg-gray-800 p-2 drop-shadow-lg duration-300 ease-in-out group-hover:-translate-x-2 group-hover:-translate-y-2"
-		>
-			Add to cart
-		</div></button
+		class="w-full max-w-md justify-self-center rounded-xl bg-gray-400 p-2 text-center text-lg text-white md:text-2xl"
 	>
+		Add to cart
+	</button>
 </div>

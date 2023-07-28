@@ -35,7 +35,7 @@
 	<div class="flex items-center">
 		<CloseButton on:click={() => (hiddenCart = true)} class="mb-4 dark:text-white" />
 	</div>
-	<div>
+	<div class="flex flex-col items-center justify-center gap-3">
 		{#if $cartStore.items.length === 0}
 			<div class="text-center">Cart is empty</div>
 		{:else}
