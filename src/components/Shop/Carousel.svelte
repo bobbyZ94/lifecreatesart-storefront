@@ -42,8 +42,6 @@
 			emblaApi.scrollTo(index)
 		}
 	}
-
-	$: console.log(markedIndicator)
 </script>
 
 <div class="embla relative">

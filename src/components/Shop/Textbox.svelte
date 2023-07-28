@@ -1,15 +1,21 @@
 <script lang="ts">
 	import { addToCart } from '$lib/shop/addToCart'
+	import { cartStore } from '../../stores/cartStore'
+	export let inventory: number
 	export let variant_id: string
 	export let title: string
 	export let description: string
-	export let inventory: number
 	export let price: number
 	export let width: number
 	export let height: number
 	export let weight: number
-	export let quantity: number
-	$: console.log(quantity)
+	// Check if quantity of item in cart is less or equal to inventory and disable addToCart button conditionally
+	$: quantityInCart =
+		$cartStore.items?.find((item) => item.variant.id === variant_id)?.quantity || 0
+	$: outOfStock = quantityInCart >= inventory
+	$: console.log('quantityInCart: ', quantityInCart)
+	$: disabled = outOfStock || inventory === 0
+	$: console.log('Inventory: ', inventory, 'outOfStock: ', outOfStock)
 </script>
 
 <div class="my-20 flex w-full max-w-5xl flex-col items-center gap-8">
@@ -31,9 +37,15 @@
 		{new Intl.NumberFormat('en-DE', { style: 'currency', currency: 'EUR' }).format(price / 100)}
 	</div>
 	<button
-		on:click={() => addToCart(variant_id)}
-		class="w-full max-w-md justify-self-center rounded-xl bg-gray-400 p-2 text-center text-lg text-white md:text-2xl"
+		on:click={() => {
+			disabled = true
+			addToCart(variant_id)
+		}}
+		{disabled}
+		class={`${
+			inventory === 0 || outOfStock ? 'bg-gray-400' : 'bg-gray-600 hover:bg-gray-700'
+		} w-full max-w-md justify-self-center rounded-xl p-2 text-center text-lg text-white md:text-2xl`}
 	>
-		Add to cart
+		{inventory === 0 || outOfStock ? 'Out of stock' : 'Add to cart'}
 	</button>
 </div>

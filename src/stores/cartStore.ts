@@ -9,6 +9,12 @@ interface Cart {
 interface Item {
 	title: string
 	quantity: number
+	variant: Variant
+	id: string
+}
+
+interface Variant {
+	id: string
 }
 
 export const cartStore: Writable<Cart> = writable({ id: '', items: [] })

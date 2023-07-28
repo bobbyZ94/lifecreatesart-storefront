@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Carousel from '../../../components/Shop/Carousel.svelte'
 	import Textbox from '../../../components/Shop/Textbox.svelte'
-	import { cartStore } from '../../../stores/cartStore'
 	export let data
 	const { product } = data
 	const variant_id = product.variants[0].id
@@ -13,6 +12,7 @@
 	const width = product.variants[0].width
 	const height = product.variants[0].height
 	const weight = product.variants[0].weight
+	$: console.log('product data', product)
 </script>
 
 <div class="my-20 max-w-7xl overflow-hidden rounded-lg p-5 drop-shadow-lg md:my-32">

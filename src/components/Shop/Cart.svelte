@@ -29,6 +29,7 @@
 			}
 		}
 	})
+	$: console.log($cartStore)
 </script>
 
 <Drawer transitionType="fly" {transitionParams} bind:hidden={hiddenCart} id="cart">

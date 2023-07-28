@@ -47,7 +47,7 @@
 
 	// Calculate number of items in cart
 	let items: number = 0
-	$: items = $cartStore.items.reduce((acc, item) => acc + item.quantity, 0)
+	$: items = $cartStore.items?.reduce((acc, item) => acc + item.quantity, 0)
 </script>
 
 <svelte:window bind:scrollY={y} />
