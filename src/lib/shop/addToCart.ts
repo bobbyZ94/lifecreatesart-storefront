@@ -1,5 +1,6 @@
 import { cartStore } from '../../stores/cartStore'
-import { get } from 'svelte/store';
+import { storeVisibleHeader } from '../../stores/visibleHeader'
+import { get } from 'svelte/store'
 
 export async function addToCart(variant_id: string) {
 	const id = get(cartStore).id
@@ -15,6 +16,7 @@ export async function addToCart(variant_id: string) {
 			}
 		}).then((res) => res.json())
 		cartStore.set(cart)
+		storeVisibleHeader.set(true)
 		return cart
 	} else {
 		throw new Error('No cart id provided')
