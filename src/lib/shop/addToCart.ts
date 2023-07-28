@@ -1,7 +1,8 @@
 import { cartStore } from '../../stores/cartStore'
+import { get } from 'svelte/store';
 
-export async function addToCart(id: string, variant_id: string) {
-	console.log('FUNCTION', id, variant_id)
+export async function addToCart(variant_id: string) {
+	const id = get(cartStore).id
 	if (id) {
 		const cart = await fetch('/api/addToCart', {
 			method: 'POST',

@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { addToCart } from '$lib/shop/addToCart'
 	import { browser } from '$app/environment'
-	let id: string
-	if (browser) id = window.localStorage.getItem('cart_id') || ''
 	export let variant_id: string
 	export let title: string
 	export let description: string
@@ -22,9 +20,9 @@
 			<div class="text-xl md:text-2xl">{description}</div>
 		</div>
 		<div class="md-cols-span-1 mt-8 flex flex-col gap-3 text-base md:text-xl">
-			<div>Width: {width ? width : ' ??'}</div>
-			<div>Height: {height ? height : ' ??'}</div>
-			<div>Weight: {weight ? weight : ' ??'}</div>
+			<div>Width: {width ? width : ' ?'}</div>
+			<div>Height: {height ? height : ' ?'}</div>
+			<div>Weight: {weight ? weight : ' ?'}</div>
 		</div>
 	</div>
 	<div class="self-start text-base md:text-xl">{inventory} pcs. in stock.</div>
@@ -32,7 +30,7 @@
 		{new Intl.NumberFormat('en-DE', { style: 'currency', currency: 'EUR' }).format(price / 100)}
 	</div>
 	<button
-		on:click={() => addToCart(id, variant_id)}
+		on:click={() => addToCart(variant_id)}
 		class="group w-full max-w-md justify-self-center rounded-xl bg-gray-400 text-center text-lg text-white md:text-2xl"
 		><div
 			class="h-full rounded-xl bg-gray-800 p-2 drop-shadow-lg duration-300 ease-in-out group-hover:-translate-x-2 group-hover:-translate-y-2"

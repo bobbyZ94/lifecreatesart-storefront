@@ -21,7 +21,7 @@
 			console.log(id)
 			if (!id) {
 				const cart = await createCart()
-				localStorage.setItem('cart_id', cart.id)
+				window.localStorage.setItem('cart_id', cart.id)
 				$cartStore = cart
 			} else {
 				const cart = await retrieveCart(id)
