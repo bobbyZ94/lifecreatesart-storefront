@@ -4,7 +4,7 @@
 	import Navlist from './Navlist.svelte'
 	import CartOutline from '~icons/mdi/cart-outline'
 	import hideHeaderOnScrollDown from '../../utils/hideHeaderOnScrollDown'
-	import { storeVisibleHeader } from '../../stores/visibleHeader'
+	import { visibleHeaderStore } from '../../stores/visibleHeaderStore'
 	import { cartStore } from '../../stores/cartStore'
 	import { fly } from 'svelte/transition'
 	import { onMount } from 'svelte'
@@ -43,17 +43,27 @@
 	$: hiddenCart, mounted && removeScrollbarWithoutLayoutShift(hiddenCart, true)
 	// Hide header when scrolling down
 	let y: number
-	$: $storeVisibleHeader = hideHeaderOnScrollDown(y, $storeVisibleHeader)
+	$: $visibleHeaderStore = hideHeaderOnScrollDown(y, $visibleHeaderStore)
 
 	// Calculate number of items in cart
 	let items: number = 0
 	$: items = $cartStore.items?.reduce((acc, item) => acc + item.quantity, 0)
+
+	// Animate cart when items are added
+	let cartButtonContainer: HTMLElement
+	function animateCart() {
+		setTimeout(() => {
+			cartButtonContainer?.classList.add('scale-110')
+			setTimeout(() => cartButtonContainer?.classList.remove('scale-110'), 300)
+		}, transitionDuration)
+	}
+	$: items, mounted && animateCart()
 </script>
 
 <svelte:window bind:scrollY={y} />
 
 <div class="relative">
-	{#if $storeVisibleHeader}
+	{#if $visibleHeaderStore}
 		<div
 			bind:this={navheader}
 			transition:fly={{ duration: 300, y: -100 }}
@@ -61,7 +71,10 @@
 				toggleNavlist ? 'bg-transparent' : 'bg-lifecreatesartblue/70'
 			} fixed right-0 top-0 z-20 flex h-14 w-full items-center justify-between px-5 backdrop-blur-md md:h-[4.5rem] md:px-12 xl:px-20`}
 		>
-			<div class="relative px-2 pt-1">
+			<div
+				class="relative px-2 pt-1 transition-all duration-300 ease-in-out"
+				bind:this={cartButtonContainer}
+			>
 				<button on:click={() => (hiddenCart = false)} bind:this={cartButton}>
 					<CartOutline class="text-3xl md:text-4xl" />
 				</button>

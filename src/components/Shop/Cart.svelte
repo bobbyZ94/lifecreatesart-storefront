@@ -18,7 +18,6 @@
 	onMount(async () => {
 		if (browser) {
 			id = window.localStorage.getItem('cart_id') || ''
-			console.log(id)
 			if (!id) {
 				const cart = await createCart()
 				window.localStorage.setItem('cart_id', cart.id)
@@ -29,7 +28,6 @@
 			}
 		}
 	})
-	$: console.log($cartStore)
 </script>
 
 <Drawer transitionType="fly" {transitionParams} bind:hidden={hiddenCart} id="cart">

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { addToCart } from '$lib/shop/addToCart'
 	import { cartStore } from '../../stores/cartStore'
+	import { disabledButtonStore } from '../../stores/disabledButtonStore'
 	export let inventory: number
 	export let variant_id: string
 	export let title: string
@@ -13,9 +14,7 @@
 	$: quantityInCart =
 		$cartStore.items?.find((item) => item.variant.id === variant_id)?.quantity || 0
 	$: outOfStock = quantityInCart >= inventory
-	$: console.log('quantityInCart: ', quantityInCart)
-	$: disabled = outOfStock || inventory === 0
-	$: console.log('Inventory: ', inventory, 'outOfStock: ', outOfStock)
+	$: $disabledButtonStore = outOfStock || inventory === 0
 </script>
 
 <div class="my-20 flex w-full max-w-5xl flex-col items-center gap-8">
@@ -38,12 +37,14 @@
 	</div>
 	<button
 		on:click={() => {
-			disabled = true
+			$disabledButtonStore = true
 			addToCart(variant_id)
 		}}
-		{disabled}
+		disabled={$disabledButtonStore}
 		class={`${
-			inventory === 0 || outOfStock ? 'bg-gray-400' : 'bg-gray-600 hover:bg-gray-700'
+			inventory === 0 || outOfStock
+				? 'bg-gray-400'
+				: 'cursor-pointer bg-gray-700 duration-300 ease-in-out hover:bg-gray-800 focus:scale-[1.05]'
 		} w-full max-w-md justify-self-center rounded-xl p-2 text-center text-lg text-white md:text-2xl`}
 	>
 		{inventory === 0 || outOfStock ? 'Out of stock' : 'Add to cart'}
