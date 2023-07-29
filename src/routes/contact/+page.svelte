@@ -82,10 +82,11 @@
 						{...$constraints.conditions}
 						class="text-xl"
 					>
-						<span class="text-base">I agree with the&nbsp</span>
+						<span class="text-base">I agree with the &nbsp</span>
+						<span />
 						<A
 							href="/privacy#contactform"
-							class="text-base text-primary-700 hover:underline dark:text-primary-600"
+							class="inline-block text-base text-primary-700 hover:underline dark:text-primary-600"
 						>
 							terms and conditions.
 						</A>

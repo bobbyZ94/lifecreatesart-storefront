@@ -3,7 +3,7 @@ import { visibleHeaderStore } from '../../stores/visibleHeaderStore'
 import { disabledButtonStore } from '../../stores/disabledButtonStore'
 import { get } from 'svelte/store'
 
-export async function addToCart(variant_id: string) {
+export async function removeFromCart(variant_id: string) {
 	if (!variant_id) throw new Error('No variant id provided')
 	const id = get(cartStore).id
 	// Check if item already in cart and get quantity
@@ -12,7 +12,7 @@ export async function addToCart(variant_id: string) {
 	)[0]?.quantity
 	const lineItemId = get(cartStore).items.filter((item) => item.variant.id === variant_id)[0]?.id
 	if (id) {
-		const cart = await fetch('/api/addToCart', {
+		const cart = await fetch('/api/removeFromCart', {
 			method: 'POST',
 			body: JSON.stringify({
 				id,
@@ -25,7 +25,6 @@ export async function addToCart(variant_id: string) {
 			}
 		}).then((res) => res.json())
 
-		// Update cart, so it doesnt lose order of items
 		cartStore.set(cart)
 		visibleHeaderStore.set(true)
 		disabledButtonStore.set(false)
