@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Hamburger from './Hamburger.svelte'
-	import Cart from '../Shop/Cart.svelte'
+	import Cart from '../Shop/Cart/Cart.svelte'
 	import Navlist from './Navlist.svelte'
 	import CartOutline from '~icons/mdi/cart-outline'
 	import hideHeaderOnScrollDown from '../../utils/hideHeaderOnScrollDown'
@@ -69,7 +69,7 @@
 			transition:fly={{ duration: 300, y: -100 }}
 			class={`${
 				toggleNavlist ? 'bg-transparent' : 'bg-lifecreatesartblue/70'
-			} fixed right-0 top-0 z-20 flex h-14 w-full items-center justify-between px-5 backdrop-blur-md md:h-[4.5rem] md:px-12 xl:px-20`}
+			} fixed right-0 top-0 z-20 flex h-14 w-full items-center justify-between px-5 pt-2 backdrop-blur-md md:h-[4.5rem] md:px-12 xl:px-20`}
 		>
 			<div
 				class="relative px-2 pt-1 transition-all duration-300 ease-in-out"

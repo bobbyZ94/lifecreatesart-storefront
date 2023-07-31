@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Carousel from '../../../components/Shop/Carousel.svelte'
-	import Textbox from '../../../components/Shop/Textbox.svelte'
+	import Carousel from '../../../components/Shop/Product/Carousel.svelte'
+	import Textbox from '../../../components/Shop/Product/Textbox.svelte'
 	export let data
 	const { product } = data
 	const variant_id = product.variants[0].id

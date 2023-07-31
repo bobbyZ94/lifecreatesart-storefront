@@ -1,5 +1,3 @@
-- refactor galler image src to filename_disk as src
-
-// CART
-- drawer open right 
-- create navlist left site icon when add to cart clicked first time
+- CART
+  - Form Shipping Adress entry page
+  - Payment confirmation page

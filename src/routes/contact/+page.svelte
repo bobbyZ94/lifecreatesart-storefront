@@ -82,24 +82,24 @@
 						{...$constraints.conditions}
 						class="text-xl"
 					>
-						<span class="text-base">I agree with the &nbsp</span>
-						<span />
-						<A
-							href="/privacy#contactform"
-							class="inline-block text-base text-primary-700 hover:underline dark:text-primary-600"
+						<span class="ml-3 text-base"
+							>I agree with the <a
+								href="/privacy#contactform"
+								class="text-base text-primary-700 hover:underline dark:text-primary-600"
+							>
+								terms and conditions.
+							</a></span
 						>
-							terms and conditions.
-						</A>
 					</Checkbox>
-				</div>
-				<div class="mt-5 flex justify-center">
-					<button class="group rounded-xl bg-gray-400 text-lg text-white md:text-xl"
-						><div
-							class=":bg-gray-800 h-full w-full rounded-xl bg-gray-800 p-2 drop-shadow-lg duration-300 ease-in-out group-hover:-translate-x-2 group-hover:-translate-y-2"
+					<div class="mt-5 flex justify-center">
+						<button class="group rounded-xl bg-gray-400 text-lg text-white md:text-xl"
+							><div
+								class=":bg-gray-800 h-full w-full rounded-xl bg-gray-800 p-2 drop-shadow-lg duration-300 ease-in-out group-hover:-translate-x-2 group-hover:-translate-y-2"
+							>
+								Send message
+							</div></button
 						>
-							Send message
-						</div></button
-					>
+					</div>
 				</div>
 			</div>
 		</form>

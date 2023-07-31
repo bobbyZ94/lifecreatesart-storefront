@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { addToCart } from '$lib/shop/addToCart'
-	import { cartStore } from '../../stores/cartStore'
-	import { disabledButtonStore } from '../../stores/disabledButtonStore'
+	import { cartStore } from '../../../stores/cartStore'
+	import { disabledButtonStore } from '../../../stores/disabledButtonStore'
 	export let inventory: number
 	export let variant_id: string
 	export let title: string
