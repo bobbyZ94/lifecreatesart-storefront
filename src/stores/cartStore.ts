@@ -1,4 +1,3 @@
-import type { P } from 'flowbite-svelte'
 import { writable } from 'svelte/store'
 import type { Writable } from 'svelte/store'
 
@@ -7,6 +6,7 @@ interface Cart {
 	id: string
 	total?: number
 	tax_total?: number
+	shipping_address?: object
 }
 
 interface Item {

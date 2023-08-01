@@ -1,9 +1,7 @@
 import { z } from 'zod'
 import { superValidate } from 'sveltekit-superforms/server'
-import { fail } from '@sveltejs/kit'
+import { error, fail } from '@sveltejs/kit'
 import { medusa } from '../../medusa'
-import { cartStore } from '../../stores/cartStore'
-import { get } from 'svelte/store'
 import type { PageServerLoad, Actions } from './$types'
 
 const schema = z.object({
@@ -23,7 +21,10 @@ const schema = z.object({
 })
 
 export const actions = {
-	addShippingAdress: async ({ request }) => {
+	addShippingAdress: async ({ cookies, request }) => {
+		// Get cartId from cookie
+		const cartId = cookies.get('cart_id') || ''
+		console.log('CART_ID_COOKIE', cartId)
 		// Serverside superform api
 		const form = await superValidate(request, schema)
 
@@ -31,10 +32,11 @@ export const actions = {
 		if (!form.valid) {
 			// Again, always return { form } and things will just work.
 			return fail(400, { form })
-		} else {
-			const cartId = get(cartStore).id
-			const cart = await medusa.carts
+		}
+		try {
+			await medusa.carts
 				.update(cartId, {
+					email: form.data.email,
 					shipping_address: {
 						company: form.data.company,
 						first_name: form.data.first_name,
@@ -51,6 +53,15 @@ export const actions = {
 				.then(({ cart }) => {
 					return cart
 				})
+
+			return { form }
+		} catch (e) {
+			console.log(e)
+			// Throw error which gets picked up by onError and display error message.
+			throw error(500, {
+				message:
+					'Error while processing your shipping information. Please try again later or write me your order details via email!'
+			})
 		}
 	}
 } satisfies Actions

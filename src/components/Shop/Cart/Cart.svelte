@@ -1,16 +1,12 @@
 <script lang="ts">
 	import { cartStore } from '../../../stores/cartStore'
 	import { disabledButtonStore } from '../../../stores/disabledButtonStore'
-	import { createCart } from '$lib/shop/createCart'
-	import { retrieveCart } from '$lib/shop/retrieveCart'
 	import { addToCart } from '$lib/shop/addToCart'
 	import { removeFromCart } from '$lib/shop/removeFromCart'
-	import { Drawer, CloseButton, Indicator } from 'flowbite-svelte'
+	import { Drawer, CloseButton } from 'flowbite-svelte'
 	import MinusCircleOutline from '~icons/mdi/minus-circle-outline'
 	import PlusCircleOutline from '~icons/mdi/plus-circle-outline'
 	import { sineIn } from 'svelte/easing'
-	import { browser } from '$app/environment'
-	import { onMount } from 'svelte'
 
 	export let hiddenCart: boolean
 	let step = 'cart'
@@ -19,28 +15,6 @@
 		duration: 200,
 		easing: sineIn
 	}
-
-	// Create or get cart from server and sync with store state
-	let id: string
-	onMount(async () => {
-		if (browser) {
-			id = window.localStorage.getItem('cart_id') || ''
-			if (!id) {
-				const cart = await createCart()
-				window.localStorage.setItem('cart_id', cart.id)
-				$cartStore = cart
-			} else {
-				const cart = await retrieveCart(id)
-				$cartStore = cart
-			}
-		}
-	})
-
-	$: console.log($cartStore)
-	// Keep cart state items sorted by created at
-	$: $cartStore.items.sort((a, b) => {
-		return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-	})
 </script>
 
 <Drawer

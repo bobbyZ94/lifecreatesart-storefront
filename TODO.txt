@@ -1,3 +1,7 @@
-- CART
-  - Form Shipping Adress entry page
-  - Payment confirmation page
+Checkout:
+- validate form info
+- push shipping info into cart
+- open payment component:
+  - summary of shipping info
+  - summary of price/tax
+  - show paypal button

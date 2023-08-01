@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Input, Label, Textarea, Checkbox, A, Spinner } from 'flowbite-svelte'
+	import { Input, Label, Textarea, Checkbox, Spinner } from 'flowbite-svelte'
 	import type { PageData } from './$types'
 	import { superForm } from 'sveltekit-superforms/client'
 
