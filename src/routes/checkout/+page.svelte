@@ -28,9 +28,11 @@
 		onError({ result }) {
 			error = result.error.message
 		},
-		onUpdated: () => {
-			$checkoutStepStore = 'payment'
-			goto('/payment')
+		onUpdated: ({ form }) => {
+			if (form.message === 'success') {
+				$checkoutStepStore = 'payment'
+				goto('/payment')
+			}
 		}
 	})
 	// Snapshot form data

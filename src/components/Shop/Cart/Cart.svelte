@@ -91,7 +91,7 @@
 					)}
 			</div>
 			<div class="mt-5">
-				<a href="/checkout" data-sveltekit-reload on:click={() => (hiddenCart = true)}>
+				<a href="/checkout" on:click={() => (hiddenCart = true)}>
 					<button
 						class="w-full max-w-md cursor-pointer justify-self-center rounded-xl bg-gray-700 p-2 text-center text-lg text-white duration-300 ease-in-out hover:bg-gray-800 focus:scale-105 md:text-xl"
 						>Checkout</button
