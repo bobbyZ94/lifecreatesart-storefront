@@ -14,8 +14,6 @@
 	$: $cartStore.items?.sort((a, b) => {
 		return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
 	})
-
-	$: console.log($cartStore), $cartStore
 </script>
 
 <div class="bg-lifecreatesartblue font-comfortaa">

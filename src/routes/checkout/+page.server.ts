@@ -1,154 +1,57 @@
-import { z } from 'zod'
 import { superValidate, message } from 'sveltekit-superforms/server'
 import { error, fail } from '@sveltejs/kit'
 import { medusa } from '../../medusa'
+import { shippingFormSchema } from '$lib/schemas'
 import type { PageServerLoad, Actions } from './$types'
-
-const schema = z.object({
-	company: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' })
-		.optional(),
-	first_name: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' }),
-	last_name: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' }),
-	address_1: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(256, { message: 'Must be 256 or fewer characters long' }),
-	address_2: z
-		.string()
-		.min(2, { message: 'Must have atleast 1 chracter' })
-		.max(256, { message: 'Must be 256 or fewer characters long' })
-		.optional(),
-	city: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' }),
-	postal_code: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' }),
-	province: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' })
-		.optional(),
-	country_code: z.string(),
-	different_billing_address: z.boolean().default(false).optional(),
-	billing_company: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' })
-		.optional(),
-	billing_first_name: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' })
-		.optional(),
-	billing_last_name: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' })
-		.optional(),
-	billing_address_1: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(256, { message: 'Must be 256 or fewer characters long' })
-		.optional(),
-	billing_address_2: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(256, { message: 'Must be 256 or fewer characters long' })
-		.optional(),
-	billing_city: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' })
-		.optional(),
-	billing_postal_code: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' })
-		.optional(),
-	billing_province: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(128, { message: 'Must be 128 or fewer characters long' })
-		.optional(),
-	billing_country_code: z.string().optional(),
-	email: z.string().email().max(128, { message: 'Must be 128 or fewer characters long' }),
-	phone: z
-		.string()
-		.min(4, { message: 'Must have atleast 4 chracters' })
-		.max(128, { message: 'Must be 128 or fewer characters long' })
-		.optional(),
-	text: z
-		.string()
-		.min(1, { message: 'Must have atleast 1 chracter' })
-		.max(2000, { message: 'Must be 2000 or fewer characters long' })
-		.optional(),
-	conditions: z.string()
-})
 
 export const actions = {
 	addShippingAddress: async ({ cookies, request }) => {
 		// Get cartId from cookie
 		const cartId = cookies.get('cart_id') || ''
 		// Serverside superform api
-		const form = await superValidate(request, schema)
+		const shippingForm = await superValidate(request, shippingFormSchema)
 		// Convenient validation check:
-		if (!form.valid) {
-			// Again, always return { form } and things will just work.
-			return fail(400, { form })
+		if (!shippingForm.valid) {
+			// Again, always return { shippingForm } and things will just work.
+			return fail(400, { shippingForm })
 		}
+
 		const shipping_address = {
-			company: form.data.company,
-			first_name: form.data.first_name,
-			last_name: form.data.last_name,
-			address_1: form.data.address_1,
-			address_2: form.data.address_2,
-			city: form.data.city,
-			country_code: form.data.country_code,
-			province: form.data.province,
-			postal_code: form.data.postal_code,
-			phone: form.data.phone
+			company: shippingForm.data.company,
+			first_name: shippingForm.data.first_name,
+			last_name: shippingForm.data.last_name,
+			address_1: shippingForm.data.address_1,
+			address_2: shippingForm.data.address_2,
+			city: shippingForm.data.city,
+			country_code: shippingForm.data.country_code,
+			province: shippingForm.data.province,
+			postal_code: shippingForm.data.postal_code,
+			phone: shippingForm.data.phone
 		}
 		// Check if billing_address different than shipping_address
-		const billing_address = form.data.different_billing_address
+		const billing_address = shippingForm.data.different_billing_address
 			? {
-					company: form.data.billing_company,
-					first_name: form.data.billing_first_name,
-					last_name: form.data.billing_last_name,
-					address_1: form.data.billing_address_1,
-					address_2: form.data.billing_address_2,
-					city: form.data.billing_city,
-					country_code: form.data.billing_country_code,
-					province: form.data.billing_province,
-					postal_code: form.data.billing_postal_code
+					company: shippingForm.data.billing_company,
+					first_name: shippingForm.data.billing_first_name,
+					last_name: shippingForm.data.billing_last_name,
+					address_1: shippingForm.data.billing_address_1,
+					address_2: shippingForm.data.billing_address_2,
+					city: shippingForm.data.billing_city,
+					country_code: shippingForm.data.billing_country_code,
+					province: shippingForm.data.billing_province,
+					postal_code: shippingForm.data.billing_postal_code
 			  }
 			: shipping_address
 		try {
-			await medusa.carts
-				.update(cartId, {
-					context: {
-						shipping_message: form.data.text
-					},
-					email: form.data.email,
-					shipping_address,
-					billing_address
-				})
-				.then(({ cart }) => {
-					return cart
-				})
-
-			return message(form, 'success')
+			await medusa.carts.update(cartId, {
+				context: {
+					shipping_message: shippingForm.data.text
+				},
+				email: shippingForm.data.email,
+				shipping_address,
+				billing_address
+			})
+			return message(shippingForm, 'success')
 		} catch (e) {
 			console.log(e)
 			// Throw error which gets picked up by onError and display error message.
@@ -167,11 +70,11 @@ export const load = (async ({ params }) => {
 	})
 
 	// Server API:
-	const form = await superValidate(schema)
+	const shippingForm = await superValidate(shippingFormSchema)
 
-	// Always return { form } in load AND form actions.
+	// Always return { shippingForm } in load AND shippingForm actions.
 	return {
-		form,
+		shippingForm,
 		regions
 	}
 }) satisfies PageServerLoad

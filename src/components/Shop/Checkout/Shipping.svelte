@@ -159,7 +159,12 @@
 			{/if}
 		</div>
 		<div>
-			<Checkbox bind:checked={$form.different_billing_address} class="text-xl">
+			<Checkbox
+				aria-invalid={$errors.different_billing_address ? 'true' : undefined}
+				bind:checked={$form.different_billing_address}
+				{...$constraints.different_billing_address}
+				class="text-xl"
+			>
 				<span class="ml-3 text-base">Use a different address as billing address</span>
 			</Checkbox>
 		</div>
@@ -329,25 +334,26 @@
 			{#if $errors.text}
 				<span class="text-sm text-red-700">{$errors.text}</span>
 			{/if}
-		</div>
-		<div>
-			<Checkbox
+			<input
 				type="checkbox"
 				name="conditions"
-				aria-invalid={$errors.conditions ? 'true' : undefined}
-				value="agreed"
+				bind:checked={$form.conditions}
 				{...$constraints.conditions}
 				class="text-xl"
-			>
-				<span class="ml-3 text-base"
+			/>
+			<Label for="text" class="mb-2 text-xl font-bold"
+				><span class="ml-3 text-base"
 					>I agree with the <a
 						href="/privacy#contactform"
 						class="text-base text-primary-700 hover:underline dark:text-primary-600"
 					>
 						terms and conditions.
 					</a></span
-				>
-			</Checkbox>
+				></Label
+			>
+			{#if $errors.conditions}
+				<span class="text-sm text-red-700">{$errors.conditions}</span>
+			{/if}
 		</div>
 		<div class="mt-5 flex justify-center">
 			<button class="group rounded-xl bg-gray-400 text-lg text-white md:text-xl"

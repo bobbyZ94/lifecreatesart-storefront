@@ -62,14 +62,14 @@
 
 <svelte:window bind:scrollY={y} />
 
-<div class="relative">
+<div class="relativ">
 	{#if $visibleHeaderStore}
 		<div
 			bind:this={navheader}
 			transition:fly={{ duration: 300, y: -100 }}
 			class={`${
-				toggleNavlist ? 'bg-transparent' : 'bg-lifecreatesartblue/70'
-			} fixed right-0 top-0 z-20 flex h-14 w-full items-center justify-between px-5 pt-2 backdrop-blur-md md:h-[4.5rem] md:px-12 xl:px-20`}
+				toggleNavlist ? 'bg-transparent' : ' bg-lifecreatesartblue/70 backdrop-blur-sm'
+			} fixed right-0 top-0 z-20 flex h-14 w-full items-center justify-between px-5 pt-2  md:h-[4.5rem] md:px-12 xl:px-20`}
 		>
 			<div
 				class="relative px-2 pt-1 transition-all duration-300 ease-in-out"
@@ -80,7 +80,9 @@
 				</button>
 				{#if items > 0}
 					<div
-						class="absolute right-0 top-0 h-[19px] w-[20px] rounded-full bg-white/95 text-center font-sans text-xs leading-5"
+						class={`${
+							toggleNavlist ? 'bg-black text-white' : 'bg-white'
+						} absolute right-0 top-0 h-[19px] w-[20px] rounded-full  text-center font-sans text-sm leading-5`}
 					>
 						{items}
 					</div>
