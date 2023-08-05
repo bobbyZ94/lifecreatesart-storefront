@@ -45,7 +45,7 @@ export const actions = {
 		try {
 			await medusa.carts.update(cartId, {
 				context: {
-					shipping_message: shippingForm.data.text
+					shipping_message: shippingForm.data.shipping_message
 				},
 				email: shippingForm.data.email,
 				shipping_address,

@@ -5,3 +5,6 @@ Checkout:
   - summary of shipping info
   - summary of price/tax
   - show paypal button
+
+  TODO:
+  - Fix duplicate form error

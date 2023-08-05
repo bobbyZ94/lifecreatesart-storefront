@@ -37,7 +37,7 @@ export const shippingFormSchema = z.object({
 		.max(128, { message: 'Must be 128 or fewer characters long' })
 		.optional(),
 	country_code: z.string(),
-	different_billing_address: z.string().optional(),
+	different_billing_address: z.boolean().optional(),
 	billing_company: z
 		.string()
 		.min(1, { message: 'Must have atleast 1 chracter' })
@@ -85,7 +85,7 @@ export const shippingFormSchema = z.object({
 		.min(4, { message: 'Must have atleast 4 chracters' })
 		.max(128, { message: 'Must be 128 or fewer characters long' })
 		.optional(),
-	text: z
+	shipping_message: z
 		.string()
 		.min(1, { message: 'Must have atleast 1 chracter' })
 		.max(2000, { message: 'Must be 2000 or fewer characters long' })

@@ -22,7 +22,7 @@
 		bind:checked={$boolValue}
 		{...$constraints}
 		{...$$restProps}
-		class="text-xl"><span class="ml-1 text-base">{label}</span></Checkbox
+		class="text-xl"><span class="ml-1 text-base">{@html label}</span></Checkbox
 	>
 	{#if $errors}<span class="text-red-500">{$errors}</span>{/if}
 </div>
